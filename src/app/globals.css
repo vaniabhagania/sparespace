@@ -1,0 +1,187 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cocoa-950: #2a180f;
+  --color-cocoa-900: #3b2418;
+  --color-cocoa-800: #4a2f20;
+  --color-cocoa-700: #5b3a29;
+  --color-cocoa-600: #735041;
+  --color-cream: #f4ecdd;
+  --color-beige: #d9c4a1;
+  --color-beige-soft: #e8dabf;
+  --color-stone: #a8a095;
+  --color-stone-dim: #8f877c;
+  --color-flag: #f2a58e;
+
+  --font-display: "Big Shoulders Display Variable", "Arial Narrow", Impact, sans-serif;
+  --font-sans: "Instrument Sans Variable", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+  --nav-h: 4.25rem;
+}
+
+html {
+  background: var(--color-cocoa-900);
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--color-cocoa-900);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-beige);
+  color: var(--color-cocoa-950);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-beige);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: 0.005em;
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2.6rem, 8vw, 5.25rem); }
+h2 { font-size: clamp(1.9rem, 4.5vw, 2.75rem); }
+h3 { font-size: 1.5rem; line-height: 1.1; }
+p { text-wrap: pretty; }
+
+a { color: inherit; }
+.link {
+  color: var(--color-beige);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.link:hover { color: var(--color-beige-soft); }
+
+.shell { width: 100%; max-width: 72rem; margin-inline: auto; padding-inline: 1rem; }
+@media (min-width: 640px) { .shell { padding-inline: 1.5rem; } }
+
+.muted { color: var(--color-stone); }
+.measure { max-width: 62ch; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  min-height: 2.9rem; padding: 0.55rem 1.25rem;
+  border-radius: 0.8rem; border: 1px solid transparent;
+  font-weight: 650; font-size: 1rem; line-height: 1.2; text-align: center; text-decoration: none;
+  cursor: pointer; transition: background-color .15s, border-color .15s, color .15s, transform .08s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn:active { transform: translateY(1px); }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .55; cursor: not-allowed; }
+.btn-primary { background: var(--color-beige); color: var(--color-cocoa-950); }
+.btn-primary:hover:not([disabled]) { background: var(--color-beige-soft); }
+.btn-ghost { border-color: var(--color-stone-dim); color: var(--color-cream); background: transparent; }
+.btn-ghost:hover:not([disabled]) { border-color: var(--color-beige); color: var(--color-beige-soft); }
+.btn-danger { border-color: var(--color-flag); color: var(--color-flag); background: transparent; }
+.btn-danger:hover:not([disabled]) { background: color-mix(in oklab, var(--color-flag) 14%, transparent); }
+.btn-sm { min-height: 2.4rem; padding: 0.35rem 0.9rem; font-size: 0.925rem; border-radius: 0.65rem; }
+.btn-block { width: 100%; }
+
+/* ---------- Form fields ---------- */
+.field {
+  width: 100%; min-height: 3rem; padding: 0.6rem 0.85rem;
+  background: var(--color-cocoa-950); color: var(--color-cream);
+  border: 1px solid var(--color-stone-dim); border-radius: 0.75rem;
+  font: inherit; font-size: 1rem; /* 16px stops iOS zooming into inputs */
+}
+.field::placeholder { color: var(--color-stone); opacity: 1; }
+.field:hover { border-color: var(--color-stone); }
+.field:focus-visible { outline: 2px solid var(--color-beige); outline-offset: 1px; border-color: var(--color-beige); }
+textarea.field { min-height: 6.5rem; resize: vertical; line-height: 1.5; }
+select.field { appearance: none; padding-right: 2.25rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5l6 6 6-6' fill='none' stroke='%23d9c4a1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 0.85rem center; }
+.field[aria-invalid="true"] { border-color: var(--color-flag); }
+.label { display: block; font-weight: 600; font-size: 0.95rem; margin-bottom: 0.35rem; }
+.hint { font-size: 0.875rem; color: var(--color-stone); margin-top: 0.3rem; }
+.err { color: var(--color-flag); font-size: 0.95rem; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--color-beige); width: 1.15rem; height: 1.15rem; flex: none; }
+input[type="datetime-local"].field { min-height: 3rem; }
+
+/* ---------- Surfaces ---------- */
+.panel { background: var(--color-cocoa-800); border-radius: 1.1rem; padding: 1.25rem; }
+@media (min-width: 640px) { .panel { padding: 1.5rem; } }
+.panel-sunken { background: var(--color-cocoa-950); border-radius: 1.1rem; padding: 1.25rem; }
+.rule { border: 0; border-top: 2px dashed var(--color-cocoa-600); }
+.rule-solid { border: 0; border-top: 1px solid var(--color-cocoa-700); }
+
+/* Chips and status marks. Always text plus a shape, never colour alone. */
+.chip {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.18rem 0.65rem; border-radius: 999px; font-size: 0.85rem; font-weight: 550;
+  background: var(--color-cocoa-700); color: var(--color-cream); white-space: nowrap;
+}
+.chip-beige { background: var(--color-beige); color: var(--color-cocoa-950); }
+.chip-outline { background: transparent; border: 1px solid var(--color-stone-dim); color: var(--color-stone); }
+.chip-flag { background: transparent; border: 1px solid var(--color-flag); color: var(--color-flag); }
+
+/* ---------- Painted bay lines (the hero backdrop) ---------- */
+.bays {
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 calc(var(--bay, 7.5rem) - 3px), color-mix(in oklab, var(--color-beige) 22%, transparent) calc(var(--bay, 7.5rem) - 3px) var(--bay, 7.5rem)),
+    linear-gradient(180deg, transparent 0, transparent calc(100% - 3px), color-mix(in oklab, var(--color-beige) 22%, transparent) calc(100% - 3px));
+  background-position: 1.25rem 0, 0 0;
+}
+
+/* ---------- Ticket (the arrival code) ---------- */
+.ticket { position: relative; background: var(--color-cocoa-800); border-radius: 1.1rem; }
+.ticket-stub { position: relative; border-top: 2px dashed var(--color-cocoa-600); }
+.ticket-stub::before, .ticket-stub::after {
+  content: ""; position: absolute; top: -0.8rem; width: 1.4rem; height: 1.4rem; border-radius: 50%;
+  background: var(--color-cocoa-900);
+}
+.ticket-stub::before { left: -0.7rem; }
+.ticket-stub::after { right: -0.7rem; }
+.code { font-family: var(--font-display); font-weight: 800; font-size: 4.25rem; line-height: 1; letter-spacing: 0.18em; padding-left: 0.18em; }
+
+/* ---------- Leaflet tuning ---------- */
+.leaflet-container { background: var(--color-cocoa-950); font-family: var(--font-sans); border-radius: 1.1rem; z-index: 0; }
+.leaflet-tile-pane { filter: sepia(.35) saturate(.7) brightness(.92) contrast(1.02); }
+.leaflet-control-attribution { background: color-mix(in oklab, var(--color-cocoa-950) 82%, transparent) !important; color: var(--color-stone) !important; }
+.leaflet-control-attribution a { color: var(--color-beige) !important; }
+.pin {
+  width: 2.6rem; height: 2.6rem; border-radius: 50% 50% 50% 0; transform: rotate(-45deg);
+  background: var(--color-beige); color: var(--color-cocoa-950);
+  display: grid; place-items: center; box-shadow: 0 2px 0 var(--color-cocoa-950);
+}
+.pin > span { transform: rotate(45deg); font-weight: 800; font-size: .8rem; }
+.pin-active { background: var(--color-cream); outline: 3px solid var(--color-beige); }
+
+/* ---------- Motion (one orchestrated moment: the car pulling into the bay) ---------- */
+@keyframes pull-in {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+.car-pull { animation: pull-in 1.1s cubic-bezier(.2, .8, .2, 1) .25s both; }
+@media (prefers-reduced-motion: reduce) {
+  .car-pull { animation: none; }
+  html { scroll-behavior: auto; }
+  * { transition-duration: .01ms !important; }
+}
+
+dialog { color: var(--color-cream); }
+dialog::backdrop { background: color-mix(in oklab, var(--color-cocoa-950) 78%, transparent); }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* Leave room for the bottom tab bar on phones. */
+.has-tabbar { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
+@media (min-width: 768px) { .has-tabbar { padding-bottom: 3rem; } }

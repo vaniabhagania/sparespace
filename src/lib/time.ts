@@ -111,3 +111,10 @@ export function formatDuration(start: Date, end: Date): string {
   if (m) parts.push(`${m} min`);
   return parts.join(" ") || "0 min";
 }
+
+/** Sensible defaults for a booking form: arrive in about half an hour, stay two hours. */
+export function defaultStay(now = new Date(), leadMin = 30, hours = 2): { start: string; end: string } {
+  const s = ceilToQuarterHour(new Date(now.getTime() + leadMin * MIN));
+  const e = new Date(s.getTime() + hours * 60 * MIN);
+  return { start: toIstInput(s), end: toIstInput(e) };
+}
