@@ -163,7 +163,7 @@ export function PlaceInput({
           <input type="hidden" name="lng" value={lng} />
         </>
       )}
-      <p id={`${id}-status`} className="hint min-h-5" aria-live="polite">{status}</p>
+      <p id={`${id}-status`} className="hint empty:mt-0" aria-live="polite">{status}</p>
       {open && places.length > 0 && (
         <ul id={`${id}-list`} role="listbox" aria-label="Place suggestions"
           className="absolute left-0 right-0 z-30 mt-[-0.6rem] max-h-72 overflow-auto rounded-xl border border-stone-dim bg-cocoa-950 py-1 shadow-xl">

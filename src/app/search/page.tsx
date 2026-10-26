@@ -217,7 +217,7 @@ export default async function SearchPage({ searchParams }: { searchParams: Promi
 
           <aside aria-label="Map" className="order-first lg:order-none lg:sticky lg:top-24 lg:self-start">
             <MapView
-              height="min(60vh, 28rem)"
+              height="clamp(12rem, 30vh, 28rem)"
               label="Map of available spaces. Locations are approximate until you book."
               center={{ lat, lng }}
               zoom={14}

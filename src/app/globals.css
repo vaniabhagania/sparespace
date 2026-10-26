@@ -22,6 +22,7 @@
   --nav-h: 4.25rem;
 }
 
+@layer base {
 html {
   background: var(--color-cocoa-900);
   -webkit-text-size-adjust: 100%;
@@ -62,6 +63,9 @@ h3 { font-size: 1.5rem; line-height: 1.1; }
 p { text-wrap: pretty; }
 
 a { color: inherit; }
+}
+
+@layer components {
 .link {
   color: var(--color-beige);
   text-decoration: underline;
@@ -137,8 +141,8 @@ input[type="datetime-local"].field { min-height: 3rem; }
 /* ---------- Painted bay lines (the hero backdrop) ---------- */
 .bays {
   background-image:
-    repeating-linear-gradient(90deg, transparent 0 calc(var(--bay, 7.5rem) - 3px), color-mix(in oklab, var(--color-beige) 22%, transparent) calc(var(--bay, 7.5rem) - 3px) var(--bay, 7.5rem)),
-    linear-gradient(180deg, transparent 0, transparent calc(100% - 3px), color-mix(in oklab, var(--color-beige) 22%, transparent) calc(100% - 3px));
+    repeating-linear-gradient(90deg, transparent 0 calc(var(--bay, 7.5rem) - 3px), color-mix(in oklab, var(--color-beige) 13%, transparent) calc(var(--bay, 7.5rem) - 3px) var(--bay, 7.5rem)),
+    linear-gradient(180deg, transparent 0, transparent calc(100% - 3px), color-mix(in oklab, var(--color-beige) 13%, transparent) calc(100% - 3px));
   background-position: 1.25rem 0, 0 0;
 }
 
@@ -152,9 +156,10 @@ input[type="datetime-local"].field { min-height: 3rem; }
 .ticket-stub::before { left: -0.7rem; }
 .ticket-stub::after { right: -0.7rem; }
 .code { font-family: var(--font-display); font-weight: 800; font-size: 4.25rem; line-height: 1; letter-spacing: 0.18em; padding-left: 0.18em; }
+}
 
 /* ---------- Leaflet tuning ---------- */
-.leaflet-container { background: var(--color-cocoa-950); font-family: var(--font-sans); border-radius: 1.1rem; z-index: 0; }
+div.leaflet-container { background: var(--color-cocoa-950); font-family: var(--font-sans); border-radius: 1.1rem; z-index: 0; }
 .leaflet-tile-pane { filter: sepia(.35) saturate(.7) brightness(.92) contrast(1.02); }
 .leaflet-control-attribution { background: color-mix(in oklab, var(--color-cocoa-950) 82%, transparent) !important; color: var(--color-stone) !important; }
 .leaflet-control-attribution a { color: var(--color-beige) !important; }
@@ -180,8 +185,9 @@ input[type="datetime-local"].field { min-height: 3rem; }
 
 dialog { color: var(--color-cream); }
 dialog::backdrop { background: color-mix(in oklab, var(--color-cocoa-950) 78%, transparent); }
-.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 
+@layer components {
 /* Leave room for the bottom tab bar on phones. */
 .has-tabbar { padding-bottom: calc(5.25rem + env(safe-area-inset-bottom)); }
 @media (min-width: 768px) { .has-tabbar { padding-bottom: 3rem; } }
+}

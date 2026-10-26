@@ -6,7 +6,7 @@ import { SetupNeeded } from "@/components/setup-needed";
 import { Notice } from "@/components/status";
 import { isDbConfigured } from "@/lib/db";
 import { isUuid } from "@/lib/ids";
-import { requireUser } from "@/lib/session";
+import { displayName, requireUser } from "@/lib/session";
 import { listMessages } from "@/lib/services/messages";
 import { formatDateTime } from "@/lib/time";
 import { Poller } from "../poller";
@@ -22,7 +22,8 @@ export default async function ChatPage({ params }: { params: Promise<{ id: strin
   const data = await listMessages(id, user.id);
   if (!data) notFound();
   const { head, messages } = data;
-  const name = head.other_deleted ? "Former member" : head.other_name || (head.host_id === user.id ? "A driver" : "The host");
+  const otherId = head.host_id === user.id ? head.driver_id : head.host_id;
+  const name = displayName({ id: otherId, nickname: head.other_name, deleted_at: head.other_deleted ? new Date() : null });
 
   return (
     <div className="shell py-6 md:py-10">

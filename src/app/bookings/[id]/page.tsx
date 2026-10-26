@@ -10,7 +10,7 @@ import { Notice, StatusBadge } from "@/components/status";
 import { isDbConfigured } from "@/lib/db";
 import { isUuid } from "@/lib/ids";
 import { formatINR } from "@/lib/money";
-import { requireUser } from "@/lib/session";
+import { displayName, requireUser } from "@/lib/session";
 import { getBookingView, type BookingView } from "@/lib/services/booking-view";
 import { COMPLAINT_CATEGORIES } from "@/lib/services/types";
 import { formatDateTime, formatDuration, formatRange } from "@/lib/time";
@@ -101,7 +101,7 @@ function ReviewBox({ id, who }: { id: string; who: string }) {
           <legend className="label">Rate {who}</legend>
           <div className="flex flex-wrap gap-2">
             {[5, 4, 3, 2, 1].map((n) => (
-              <label key={n} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-stone-dim px-3 has-[:checked]:border-beige has-[:checked]:bg-cocoa-700">
+              <label key={n} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-stone-dim px-3 has-[:checked]:border-beige has-[:checked]:bg-cocoa-700 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-beige">
                 <input type="radio" name="rating" value={n} required />
                 <span>{n} {n === 1 ? "star" : "stars"}</span>
               </label>
@@ -153,7 +153,7 @@ export default async function BookingPage({ params }: { params: Promise<{ id: st
   const start = new Date(b.start_at);
   const end = new Date(b.end_at);
   const now = Date.now();
-  const otherName = other.deleted ? "Former member" : other.name || (role === "driver" ? "The host" : "The driver");
+  const otherName = displayName({ id: other.id, nickname: other.name, deleted_at: other.deleted ? new Date() : null });
   const mine = reviews.find((r) => r.reviewer_id === user.id);
   const confirmedPlus = ["confirmed", "checked_in", "completed"].includes(b.status);
   const checkInOpen = now >= start.getTime() - 30 * MIN && now < end.getTime();

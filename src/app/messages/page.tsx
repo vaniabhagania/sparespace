@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SetupNeeded } from "@/components/setup-needed";
 import { isDbConfigured } from "@/lib/db";
-import { requireUser } from "@/lib/session";
+import { displayName, requireUser } from "@/lib/session";
 import { listConversations } from "@/lib/services/messages";
 import { formatDateTime } from "@/lib/time";
 
@@ -30,7 +30,7 @@ export default async function MessagesPage() {
                 <div className="min-w-0">
                   <h2 className="text-[1.5rem]">
                     <Link href={`/messages/${c.id}`} className="no-underline after:absolute after:inset-0 after:content-['']">
-                      {c.other_deleted ? "Former member" : c.other_name || (c.role === "driver" ? "The host" : "A driver")}
+                      {displayName({ id: c.other_id, nickname: c.other_name, deleted_at: c.other_deleted ? new Date() : null })}
                     </Link>
                   </h2>
                   <p className="text-sm text-stone">{c.space_title}</p>

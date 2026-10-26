@@ -82,10 +82,10 @@ export async function sendMessage(conversationId: string, userId: string, raw: s
 
 export async function listConversations(userId: string) {
   return db.query<{
-    id: string; space_id: string; space_title: string; other_name: string | null; other_deleted: boolean;
+    id: string; space_id: string; space_title: string; other_id: string; other_name: string | null; other_deleted: boolean;
     role: "driver" | "host"; last_body: string | null; last_at: Date | null; unread: boolean;
   }>(
-    `select c.id, c.space_id, s.title as space_title, o.nickname as other_name, (o.deleted_at is not null) as other_deleted,
+    `select c.id, c.space_id, s.title as space_title, o.id as other_id, o.nickname as other_name, (o.deleted_at is not null) as other_deleted,
             case when c.driver_id = $1 then 'driver' else 'host' end as role,
             lm.body as last_body, c.last_message_at as last_at,
             coalesce(lm.sender_id <> $1 and lm.created_at > case when c.driver_id = $1 then c.driver_last_read_at else c.host_last_read_at end, false) as unread

@@ -90,27 +90,31 @@ export function BookingForm(p: Props) {
       </div>
 
       {sel.startsWith("new:") && (
-        <fieldset className="grid gap-3 rounded-xl border border-cocoa-600 p-3.5">
-          <legend className="px-1.5 text-sm font-semibold">About this vehicle</legend>
-          <div>
-            <label className="label" htmlFor="nv-label">Name</label>
-            <input id="nv-label" name="nv_label" className="field" maxLength={40} value={nv.label} onChange={(e) => setNv({ ...nv, label: e.target.value })} />
+        <details className="rounded-xl border border-cocoa-600 px-3.5 py-2.5">
+          <summary className="cursor-pointer text-[0.95rem] font-semibold text-beige">
+            {vehicleLabel}, {dims.length_cm} × {dims.width_cm} × {dims.height_cm} cm. Edit size, name or plate
+          </summary>
+          <div className="mt-3 grid gap-3">
+            <div>
+              <label className="label" htmlFor="nv-label">Name</label>
+              <input id="nv-label" name="nv_label" className="field" maxLength={40} value={nv.label} onChange={(e) => setNv({ ...nv, label: e.target.value })} />
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {([["length", "Length"], ["width", "Width"], ["height", "Height"]] as const).map(([k, l]) => (
+                <div key={k}>
+                  <label className="label" htmlFor={`nv-${k}`}>{l} (cm)</label>
+                  <input id={`nv-${k}`} name={`nv_${k}_cm`} className="field px-2.5" inputMode="numeric" value={nv[k]} onChange={(e) => setNv({ ...nv, [k]: e.target.value.replace(/\D/g, "").slice(0, 4) })} />
+                </div>
+              ))}
+            </div>
+            <p className="hint -mt-1">We filled in typical sizes. Adjust them if yours is bigger, with a roof rack, say.</p>
+            <div>
+              <label className="label" htmlFor="nv-plate">Number plate <span className="font-normal text-stone">(optional)</span></label>
+              <input id="nv-plate" name="nv_plate" className="field uppercase" maxLength={14} autoCapitalize="characters" autoComplete="off" value={nv.plate} onChange={(e) => setNv({ ...nv, plate: e.target.value })} />
+              <p className="hint">Shown to the host only after they confirm you, so they can spot your car.</p>
+            </div>
           </div>
-          <div className="grid grid-cols-3 gap-2">
-            {([["length", "Length"], ["width", "Width"], ["height", "Height"]] as const).map(([k, l]) => (
-              <div key={k}>
-                <label className="label" htmlFor={`nv-${k}`}>{l} (cm)</label>
-                <input id={`nv-${k}`} name={`nv_${k}_cm`} className="field px-2.5" inputMode="numeric" value={nv[k]} onChange={(e) => setNv({ ...nv, [k]: e.target.value.replace(/\D/g, "").slice(0, 4) })} />
-              </div>
-            ))}
-          </div>
-          <p className="hint -mt-1">We filled in typical sizes. Adjust them if yours is bigger, with a roof rack, say.</p>
-          <div>
-            <label className="label" htmlFor="nv-plate">Number plate <span className="font-normal text-stone">(optional)</span></label>
-            <input id="nv-plate" name="nv_plate" className="field uppercase" maxLength={14} autoCapitalize="characters" autoComplete="off" value={nv.plate} onChange={(e) => setNv({ ...nv, plate: e.target.value })} />
-            <p className="hint">Shown to the host only after they confirm you, so they can spot your car.</p>
-          </div>
-        </fieldset>
+        </details>
       )}
 
       <div className="rounded-xl bg-cocoa-950 p-3">

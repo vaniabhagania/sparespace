@@ -5,9 +5,12 @@ import { SearchForm, type SavedVehicle } from "@/components/search-form";
 import { BAY_PRESETS, VEHICLE_PRESETS } from "@/lib/fit";
 import { getCurrentUser } from "@/lib/session";
 import { listVehicles } from "@/lib/services/vehicles";
+import { Notice } from "@/components/status";
+import { first, type RawParams } from "@/lib/search-params";
 import { defaultStay } from "@/lib/time";
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: Promise<RawParams> }) {
+  const deleted = Boolean(first((await searchParams).deleted));
   let vehicles: SavedVehicle[] = [];
   try {
     const user = await getCurrentUser();
@@ -20,6 +23,9 @@ export default async function Home() {
 
   return (
     <>
+      {deleted && (
+        <div className="shell pt-5"><Notice tone="ok">Your account has been deleted. Thanks for trying SpareSpace.</Notice></div>
+      )}
       <section className="bays relative overflow-hidden border-b border-cocoa-700">
         <div className="shell grid items-center gap-10 py-10 md:grid-cols-[1.15fr_1fr] md:py-16 lg:gap-16">
           <div>

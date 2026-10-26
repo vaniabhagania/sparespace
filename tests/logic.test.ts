@@ -200,3 +200,14 @@ describe("money and geo", () => {
     expect(d).toBeLessThan(300);
   });
 });
+
+describe("bay presets agree with their labels", () => {
+  const order = ["bike", "hatchback", "sedan", "suv", "van", "truck"] as const;
+  const biggest = (id: string) => {
+    const b = BAY_PRESETS.find((x) => x.id === id)!;
+    return [...order].reverse().find((k) => checkFit(VEHICLE_PRESETS[k].dims, { max_length_cm: b.dims.length_cm, max_width_cm: b.dims.width_cm, max_height_cm: b.dims.height_cm }).fits);
+  };
+  it.each(["bike", "hatchback", "sedan", "suv", "van"])("the %s bay holds that class and nothing bigger", (id) => {
+    expect(biggest(id)).toBe(id);
+  });
+});

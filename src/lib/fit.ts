@@ -25,8 +25,8 @@ export const VEHICLE_KIND_LABELS: Record<string, string> = Object.fromEntries(
 export const BAY_PRESETS: { id: string; label: string; dims: Dims }[] = [
   { id: "bike", label: "Bikes and scooters", dims: { length_cm: 230, width_cm: 110, height_cm: 160 } },
   { id: "hatchback", label: "Up to a hatchback", dims: { length_cm: 440, width_cm: 215, height_cm: 200 } },
-  { id: "sedan", label: "Up to a sedan", dims: { length_cm: 495, width_cm: 225, height_cm: 200 } },
-  { id: "suv", label: "Up to an SUV", dims: { length_cm: 530, width_cm: 235, height_cm: 220 } },
+  { id: "sedan", label: "Up to a sedan", dims: { length_cm: 470, width_cm: 225, height_cm: 200 } },
+  { id: "suv", label: "Up to an SUV", dims: { length_cm: 500, width_cm: 235, height_cm: 220 } },
   { id: "van", label: "Up to a van", dims: { length_cm: 580, width_cm: 245, height_cm: 250 } },
 ];
 

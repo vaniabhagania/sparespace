@@ -177,7 +177,7 @@ export function SpaceForm({ initial, locked = false }: { initial: SpaceFormIniti
           <legend className="label">Days</legend>
           <div className="flex flex-wrap gap-2">
             {DAY_NAMES.map((n, i) => (
-              <label key={n} className="flex min-h-11 min-w-14 cursor-pointer items-center justify-center gap-2 rounded-lg border border-stone-dim px-3 has-[:checked]:border-beige has-[:checked]:bg-cocoa-700">
+              <label key={n} className="flex min-h-11 min-w-14 cursor-pointer items-center justify-center gap-2 rounded-lg border border-stone-dim px-3 has-[:checked]:border-beige has-[:checked]:bg-cocoa-700 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-beige">
                 <input type="checkbox" name="days" value={i} checked={days.includes(i)} onChange={() => toggleDay(i)} className="sr-only" />
                 <span>{n}</span>
               </label>
@@ -225,7 +225,7 @@ export function SpaceForm({ initial, locked = false }: { initial: SpaceFormIniti
           <legend className="label">Features</legend>
           <div className="flex flex-wrap gap-2">
             {AMENITIES.map((a) => (
-              <label key={a.id} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-stone-dim px-3 has-[:checked]:border-beige has-[:checked]:bg-cocoa-700">
+              <label key={a.id} className="flex min-h-11 cursor-pointer items-center gap-2 rounded-lg border border-stone-dim px-3 has-[:checked]:border-beige has-[:checked]:bg-cocoa-700 has-[:focus-visible]:outline has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-offset-2 has-[:focus-visible]:outline-beige">
                 <input type="checkbox" name="amenities" value={a.id} defaultChecked={initial.amenities.includes(a.id)} />
                 <span>{a.label}</span>
               </label>
